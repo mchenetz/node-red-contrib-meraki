@@ -1,0 +1,21 @@
+{
+    "name"         : "node-red-contrib-meraki",
+    "version"      : "0.0.1",
+    "description"  : "A node-red node to communicate with the Meraki cloud!",
+    "author": {
+		"name": "Michael Chenetz",
+		"email": "mike@chenetz.net"
+	},
+	"repository" : {
+    		"type" : "git",
+    		"url" : "https://github.com/mchenetz/node-red-contrib-meraki.git"
+	},
+    "dependencies": {
+    },
+    "keywords": [ "node-red" ],
+    "node-red"     : {
+        "nodes": {
+            "meraki": "meraki/merakiNode.js"
+        }
+    }
+}

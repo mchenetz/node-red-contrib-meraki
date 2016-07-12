@@ -1,0 +1,222 @@
+<script type="text/javascript">
+    RED.nodes.registerType('Meraki',{
+        category: 'function',
+        color: '#d3d3d3',
+        defaults: {
+            name: {value:"Meraki"},
+            func: {value: "getOrg"},
+            org: {value: ""},
+            netid: {value: ""},
+            serial: {value: ""},
+            stackid: {value: ""},
+            vlanid: {value: ""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "meraki.ico",
+        credentials: {
+            apikey: {type:"password"}
+        },
+        label: function() {
+            return this.name||"Meraki";
+        },oneditprepare: function() {
+    $("#node-input-func").change(function() {
+        if ($("#node-input-func").val() === "getOrgDevices") {
+            $("#node-row-org").show();
+            $("#node-row-netid").hide();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getOrgDevices");
+        } else if ($("#node-input-func").val() === "getOrg") {
+            $("#node-row-org").hide();
+            $("#node-row-netid").hide();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getOrg");
+        } else if ($("#node-input-func").val() === "getNetworkDevices") {
+            $("#node-row-org").hide();
+            $("#node-row-netid").show();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getNetworkDevices");
+    } else if ($("#node-input-func").val() === "getNetworkList") {
+            $("#node-row-org").show();
+            $("#node-row-netid").hide();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getNetworkList");
+    } else if ($("#node-input-func").val() === "getAdmins") {
+            $("#node-row-org").show();
+            $("#node-row-netid").hide();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getAdmins");
+    } else if ($("#node-input-func").val() === "getConfigTemplates") {
+            $("#node-row-org").show();
+            $("#node-row-netid").hide();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getConfigTemplates");
+    } else if ($("#node-input-func").val() === "getDeviceDetail") {
+            $("#node-row-org").hide();
+            $("#node-row-netid").show();
+            $("#node-row-serial").show();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getDeviceDetail");
+    } else if ($("#node-input-func").val() === "getNonMerakiVpnPeers") {
+            $("#node-row-org").show();
+            $("#node-row-netid").hide();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getNonMerakiVpnPeers");
+    } else if ($("#node-input-func").val() === "getOrgAdmins") {
+            $("#node-row-org").show();
+            $("#node-row-netid").hide();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getOrgAdmins");
+    } else if ($("#node-input-func").val() === "getSamlRoles") {
+            $("#node-row-org").show();
+            $("#node-row-netid").hide();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getSamlRoles");
+    } else if ($("#node-input-func").val() === "getSnmpSettings") {
+            $("#node-row-org").show();
+            $("#node-row-netid").hide();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getSnmpSettings");
+    } else if ($("#node-input-func").val() === "getSwitchStacks") {
+            $("#node-row-org").hide();
+            $("#node-row-netid").show();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getSwitchStacks");
+    } else if ($("#node-input-func").val() === "getSwitchStackMembers") {
+            $("#node-row-org").hide();
+            $("#node-row-netid").show();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").show();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getSwitchStackMembers");
+    } else if ($("#node-input-func").val() === "getTemplates") {
+            $("#node-row-org").show();
+            $("#node-row-netid").hide();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getTemplates");
+    } else if ($("#node-input-func").val() === "getVlans") {
+            $("#node-row-org").hide();
+            $("#node-row-netid").show();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getVlans");
+    } else if ($("#node-input-func").val() === "getVlanDetail") {
+            $("#node-row-org").hide();
+            $("#node-row-netid").show();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").show();
+            $("#node-input-name").val("getVlanDetail");
+    } else if ($("#node-input-func").val() === "getVpnPeers") {
+            $("#node-row-org").hide();
+            $("#node-row-netid").show();
+            $("#node-row-serial").hide();
+            $("#node-row-stackid").hide();
+            $("#node-row-vlanid").hide();
+            $("#node-input-name").val("getVpnPeers");
+    } else {
+        $("#node-row-org").hide();
+        $("#node-row-serial").hide();
+        $("#node-row-netid").hide();
+        $("#node-row-stackid").hide();
+        $("#node-row-vlanid").hide();
+       
+    };
+});
+}
+    });
+</script>
+
+<script type="text/x-red" data-template-name="Meraki">
+    <div class="form-row">
+        <label for="node-input-lblname"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+     <label for="node-input-password"><i class="icon-tag"></i> Apikey</label>
+     <input type="password" id="node-input-apikey">
+    </div>   
+    <div class="form-row">
+        <label for="node-input-func"><i class="fa fa-arrow-left"></i> Function</label>
+        <select type="text" id="node-input-func" >
+        <option value="getAdmins">get-admins</option>
+        <option value="getConfigTemplates">get-config-templates</option>
+        <option value="getDeviceDetail">get-device-detail</option>
+        <option value="getNetworkByName">get-network-by-name</option>
+        <option value="getNetworkDevices">get-network-devices</option>
+        <option value="getNetworkList">get-network-list</option>
+        <option value="getNonMerakiVpnPeers">get-nonmeraki-vpn-peers</option>
+        <option value="getOrg">get-organization</option>
+        <option value="getOrgAdmins">get-org-admins</option>
+        <option value="getOrgDevices">get-org-devices</option>
+        <option value="getSamlRoles">get-saml-roles</option>
+        <option value="getSnmpSettings">get-snmp-settings</option>
+        <option value="getSwitchStacks">get-switch-stacks</option>    
+        <option value="getSwitchStackMembers">get-switch-stack-members</option>
+        <option value="getTemplates">get-templates</option>
+        <option value="getVlans">get-vlans</option>
+        <option value="getVlanDetail">get-vlan-detail</option>
+        <option value="getVpnPeers">get-vpn-peers</option>
+        </select>
+    </div>
+    <div class="form-row">
+        <div id="node-row-org" class="hide">
+            <label   for="node-input-org"><i class="icon-tag"></i> Org</label>
+            <input  type="text" id="node-input-org" placeholder="org">
+        </div>
+    <div class="form-row">
+        <div id="node-row-netid" class="hide">
+            <label   for="node-input-lblnetid"><i class="icon-tag"></i> Network</label>
+            <input  type="text" id="node-input-netid" placeholder="netid">
+        </div>   
+    </div>
+    <div class="form-row">
+        <div id="node-row-serial" class="hide">
+            <label   for="node-input-lblserial"><i class="icon-tag"></i> Serial</label>
+            <input  type="text" id="node-input-serial" placeholder="serial">
+        </div>   
+    </div>
+    <div class="form-row">
+        <div id="node-row-stackid" class="hide">
+            <label   for="node-input-lblstackid"><i class="icon-tag"></i> Stackid</label>
+            <input  type="text" id="node-input-stackid" placeholder="stackid">
+        </div>   
+    </div>
+    <div class="form-row">
+        <div id="node-row-vlanid" class="hide">
+            <label   for="node-input-lblvlanid"><i class="icon-tag"></i> Vlanid</label>
+            <input  type="text" id="node-input-vlanid" placeholder="vlanid">
+        </div>   
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="Meraki">
+    <p>A Node that works with Meraki Cloud!</p>
+</script>
+
